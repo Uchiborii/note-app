@@ -38,7 +38,7 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<div id="navbarSupportedContent">
 					<!-- Left Side Of Navbar -->
 					<ul class="navbar-nav mr-auto">
 
@@ -65,7 +65,7 @@
 
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                  document.getElementById('logout-form').submit();">
 									{{ __('Logout') }}
 								</a>
 
@@ -92,25 +92,27 @@
 						<div class="card-header">タグ一覧</div>
 						<div class="card-body py-2 px-4">
 							<a class='d-block' href='/'>全て表示</a>
-
-							　　
+							@foreach($tags as $tag)
+							<a href="/?tag={{ $tag['name'] }}" class='d-block'>{{ $tag['name'] }}</a>
+							@endforeach
 						</div>
 					</div>
-					　　
 				</div>
 				<div class="col-md-4 p-0">
 					<div class="card h-100">
 						<div class="card-header d-flex">メモ一覧 <a class='ml-auto' href='/create'><i
 									class="fas fa-plus-circle"></i></a></div>
 						<div class="card-body p-2">
-
+							@foreach($memos as $memo)
+							<a href="/edit/{{ $memo['id'] }}" class='d-block'>{{ $memo['content'] }}</a>
+							@endforeach
 						</div>
 					</div>
 				</div> <!-- col-md-3 -->
 				<div class="col-md-6 p-0">
 					@yield('content')
 				</div>
-			</div> <!-- row justify-content-center -->
+			</div>
 		</main>
 	</div>
 	@yield('footer')
